@@ -58,6 +58,7 @@ SELECT
 FROM user_measure_count;
 ```
 **ERROR:** Error in creating temp table "syntax error at or near "Select""
+
 **Correction:** **AS** is missed and table name is not properly named
 **SOULTION:**
 ```sql
@@ -71,14 +72,17 @@ SELECT
   GROUP BY 1;
 ```
 **Error for question no. 2** "function mean(bigint) does not exist"
+
 **Correction:** Replace **MEAN** with **AVG** in SQL query
- **SOLUTION: 79**
+ **SOLUTION:**
  ```sql
   SELECT
   ROUND(AVG(measure_count)) AS average_value
 FROM user_measure_count;
 ```
-
+| average_value |
+| ------------- |
+| 79            | 
 ### 3. What about the median number of measurements per user?
 ```sql
 SELECT
@@ -86,6 +90,7 @@ SELECT
 FROM user_measure_count;
 ```
 **ERROR:** function percentile_continuous(numeric, character varying) does not exist
+
 **CORRECTION:** Use a numeric column in percentile function
 **Solution: 2**
  ```sql
@@ -93,6 +98,9 @@ SELECT
   PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY measure_count) AS median_value
 FROM user_measure_count;
 ```
+| median_value |
+| ------------ |
+| 2            | 
 ### 4. How many users have 3 or more measurements?
 ```sql
 SELECT
@@ -118,6 +126,7 @@ FROM user_measure_count
 WHERE measure_count >= 1000;
 ```
 **ERROR:** "Syntax error at or near "SUM"
+
 **CORRECTION:** We have to replace **SUM**to **COUNT**
 **Solution: 5**
 ```sql
@@ -126,6 +135,9 @@ SELECT
 FROM user_measure_count
 WHERE measure_count >= 1000;
 ```
+| count(id) |
+| --------- |
+| 5         | 
 ### 6. Have logged blood glucose measurements?
 ```sql 
 SELECT
@@ -134,6 +146,7 @@ FROM health.user_logs
 WHERE measure is 'blood_sugar';
 ```
 **ERROR:** syntax error at or near "DISTINCT"
+
 **CORRECTION:** Put barckets in distinct keyword and WHERE clause needs an "=" sign instead of 'is' and column value to be searched is "blood_glucose" instead of "blood_sugar"
 **Solution: 325**
 ```sql
@@ -142,6 +155,9 @@ SELECT
 FROM health.user_logs
 WHERE measure = 'blood_glucose';
 ```
+| COUNT(DISTINCT id) |
+| ------------------ |
+| 325                | 
 ### 7. Have at least 2 types of measurements?
 ```sql
 SELECT
@@ -150,14 +166,18 @@ FROM user_measure_count
 WHERE COUNT(DISTINCT measures) >= 2;
 ```
 **ERROR:** Column "measures" does not exist
+
 **CORRECTION:** Replace column with correct column value **"unique_measures"**
 **SOLUTION : 204**
 ```sql
 SELECT
-  COUNT(*)
+  COUNT(*) as count_measure
 FROM user_measure_count
 WHERE unique_measures >= 2;
 ```
+| count_measure |
+| ------------- |
+| 204           | 
 ### 8. Have all 3 measures - blood glucose, weight and blood pressure?
 ```sql
 SELECT
@@ -166,14 +186,18 @@ FROM usr_measure_count
 WHERE unique_measures = 3;
 ```
 **ERROR:** relation "usr_measure_count" does not exist
+
 **CORRECTION:** replace with correct table name
 **SOLUTION: 50**
 ```sql
 SELECT
-  COUNT(*)
+  COUNT(*) as count_measure
 FROM user_measure_count
 WHERE unique_measures = 3;
 ```
+| count_measure |
+| ------------- |
+| 50            | 
 ### 9.  What is the median systolic/diastolic blood pressure values?
 ```sql
 SELECT
@@ -183,13 +207,9 @@ FROM health.user_logs
 WHERE measure is blood_pressure;
 ```
 **ERROR:** syntax error at or near "(" 
+
 **CORRECTION:** Seems like there is a comma missing between the median columns and **GROUP** keyword and where clause should use "=" instead of "is" for value 'blood_pressure'
-**Solution:
- median_systolic
-126
-median_diastolic
-79
-**
+**Solution:**
 ```sql
 SELECT
   PERCENTILE_CONT(0.5) WITHIN GROUP (ORDER BY systolic) AS median_systolic,
@@ -197,3 +217,7 @@ SELECT
 FROM health.user_logs
 WHERE measure = 'blood_pressure';
 ```
+|  median_systolic  | median_diastolic  | 
+| ----------------- |:-----------------:|
+| 126               | 79                |
+
