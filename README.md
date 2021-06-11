@@ -1,1 +1,1 @@
-# Health-Analytics-Mini-Cas-Study
+# Health-Analytics-Mini-Case-Study
