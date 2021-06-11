@@ -25,13 +25,20 @@ FROM health.user_logs;
 When you execute the SQL query above, we get the following errors:
 1. **we get an error syntax error at or near "DISTINCT"**
 2. **Also  no column name user_id** 
+
 **Correction:** Put brackets after **COUNT** & Replace the **user_id** column to **id**
-**SOLUTION: 554**
+
+**SOLUTION:**
 ```sql
 SELECT
   COUNT(DISTINCT id)
 FROM health.user_logs;
 ```
+
+| COUNT(DISTINCT id) |
+| ------------------ |
+| 554                | 
+
 ### for questions 2-8 we created a temporary table
 ```sql
 DROP TABLE IF EXISTS user_measure_count;
