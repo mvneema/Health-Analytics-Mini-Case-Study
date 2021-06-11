@@ -7,7 +7,7 @@ The Health Co analytics team have shared with us their SQL script - they unfortu
 
 We’ve been asked to quickly debug their SQL script and use the resulting query outputs to quickly answer a few questions that the GM has requested for a board meeting about their active users.
 
-<img alt="alternate text goes here" src="SQL.jpg" width="60%" />
+<img alt="alternate text goes here" src="SQL.png" width="60%" />
 
 ### Debug SQL Script
 
